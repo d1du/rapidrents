@@ -1,0 +1,213 @@
+﻿@{
+    Layout = "~/Views/Shared/_LayoutAdmin.cshtml";
+}
+@Styles.Render("~/Content/faq.css")
+
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.4.1/css/bootstrap-datepicker3.css" />
+
+
+<center><h2>Property Posting Process</h2></center>
+
+<div class="panel" ng-controller="listingWizardController as main">
+    <div ng-class="main.isInsertSuccessful? 'noselect disabled blurredElement' : ''" class="panel-body">
+        <div ng-class="main.isAddressEmpty? 'noselect disabled blurredElement' : ''" class="panel-body">
+            <center><h3 class="title-hero">Just follow 4 easy steps!</h3></center>
+            <div class="example-box-wrapper">
+                <div id="form-wizard-3" class="form-wizard">
+                    <ul>
+                        <li ng-class="main.selectButtonClicked? '': 'active'">
+                            <a href="#step-1" data-toggle="tab" ng-click="main.goBackToStep1()">
+                                <label class="wizard-step">1</label><span class="wizard-description">Find an address<small>Add/Edit address</small></span>
+                            </a>
+                        </li>
+                        <li ng-class="{disabled: !main.selectButtonClicked
+                        , '': main.goToScreen3Clicked&&main.selectButtonClicked
+                        , active: !main.goToScreen3Clicked&&main.selectButtonClicked}">
+                            <a href="#step-2" data-toggle="tab" ng-click="main.goBackToStep2()">
+                                <label class="wizard-step">2</label><span class="wizard-description">Provide listing information <small>Add/Edit listing info</small></span>
+                            </a>
+                        </li>
+                        <li ng-class="{disabled: !main.goToScreen3Clicked
+                        , '': main.goToScreen4Clicked&&main.goToScreen3Clicked
+                        , active: !main.goToScreen4Clicked&&main.goToScreen3Clicked}">
+                            <a href="#step-3" data-toggle="tab" ng-click="main.goBackToStep3()">
+                                <label class="wizard-step">3</label><span class="wizard-description">Upload pictures <small>Attach/Delete photos of property</small></span>
+                            </a>
+                        </li>
+                        <li ng-class="main.goToScreen4Clicked? 'active': 'disabled'">
+                            <a href="#step-4" data-toggle="tab">
+                                <label class="wizard-step">4</label><span class="wizard-description">Review & Confirm<small>Finalize the posting</small></span>
+                            </a>
+                        </li>
+                    </ul>
+                    <div class="tab-content">
+                        <div class="tab-pane active" id="step-1">
+                            <ng-include src="'/Scripts/sabio/listings/ListingWizardStep1.html'"></ng-include>
+                        </div>
+
+                        <div class="tab-pane" id="step-2">
+                            <ng-include src="'/Scripts/sabio/listings/ListingWizardStep2.html'"></ng-include>
+                        </div>
+
+                        <div class="tab-pane" id="step-3">
+                            <ng-include src="'/Scripts/sabio/listings/ListingWizardStep3.html'"></ng-include>
+                        </div>
+
+                        <div class="tab-pane" id="step-4">
+                            <ng-include src="'/Scripts/sabio/listings/ListingWizardStep4.html'"></ng-include>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!--upon successful entry-->
+    <div ng-show="main.isInsertSuccessful" class="centerScreenDiv panel-body successConfirmation">
+        <p><span class="glyphicon glyphicon-ok" style="color: forestgreen"></span>&nbsp; &nbsp; Your entry has been successfully submitted!</p>
+        <div class="row bg-default panel-body">
+            <center>
+                <button type="button" class="btn btn-primary"
+                        ng-click="main.clearObj()" href="#step-1" data-toggle="tab">
+                    Add another posting
+                </button>
+            </center>
+        </div>
+
+    </div>
+
+    <div ng-show="main.isAddressEmpty" class="centerScreenDiv2 panel-body addAddressConfirmation">
+        <p><h4> The address searched was not found. <br /> Add new address or hit cancel to search again.</h4></p>
+        <div class="row bg-default panel-body">
+            <center>
+
+                <button type="button" class="btn btn-primary"
+                        ng-click="main.selectAddress()" data-toggle="tab">
+                    Add New Address
+                </button>
+                <button class="btn btn-default" ng-click="main.cancelPopup()"> Cancel</button>
+            </center>
+        </div>
+
+    </div>
+
+
+</div>
+<script type="text/ng-template" id="modalContent.html">
+    <div class="modal-header">
+        <h3 class="modal-title">Add/Edit Address</h3>
+    </div>
+    <div class="modal-body">
+        <form id="modalForm" name="mc.modalForm" ng-submit="mc.ok()" novalidate>
+            <div>
+                <br />Line 1:
+                <input type="text" class="form-control ng-class:{'error': mc.showAddressErrors && !mc.modalForm.line1.$valid}"
+                       placeholder="Line 1"
+                       name="line1"
+                       id="line1"
+                       ng-model="mc.addressObject.line1"
+                       required>
+                <div role="alert" class="help-inline error">
+                    <span class="error" ng-show="mc.showAddressErrors && mc.modalForm.line1.$error.required">Address required</span>
+                </div>
+            </div>
+
+            <div>
+                <br />Line 2:
+                <input type="text"
+                       class="form-control ng-class:{'error': mc.showAddressErrors && !mc.modalForm.line2.$valid}"
+                       placeholder="Line 2"
+                       name="line2"
+                       id="line2"
+                       ng-model="mc.addressObject.line2">
+            </div>
+
+            <div>
+                <br />City:
+                <input type="text"
+                       class="form-control ng-class:{'error': mc.showAddressErrors && !mc.modalForm.city.$valid}"
+                       placeholder="City"
+                       name="city"
+                       id="city"
+                       ng-model="mc.addressObject.city"
+                       required>
+                <div role="alert" class="help-inline error">
+                    <span class="error" ng-show="mc.showAddressErrors && mc.modalForm.city.$error.required">City required</span>
+                </div>
+            </div>
+
+            <div>
+                <br />State:
+                <select class="form-control ng-class:{'error': mc.showAddressErrors && !mc.modalForm.state.$valid}"
+                        placeholder="state"
+                        id="state"
+                        name="state"
+                        ng-model="mc.addressObject.state"
+                        required convert-to-number>
+
+                    <option value="{{state.stateProvinceId}}" ng-repeat="state in mc.states track by state.stateProvinceId">{{state.stateProvinceCode}}</option>
+                </select>
+                <div role="alert" class="help-inline error">
+                    <span class="error" ng-show="mc.showAddressErrors && mc.modalForm.state.$error.required">State required</span>
+                </div>
+            </div>
+
+            <div>
+                <br />Zip Code:
+                <input type="text"
+                       class="form-control ng-class:{'error': mc.showAddressErrors && !mc.modalForm.zipCode.$valid}"
+                       placeholder="Zip code"
+                       name="zipcode"
+                       id="zipcode"
+                       ng-model="mc.addressObject.zipCode"
+                       required>
+                <div role="alert" class="help-inline error">
+                    <span class="error" ng-show="mc.showAddressErrors && mc.modalForm.zipCode.$error.required">Zip code required</span>
+                </div>
+            </div>
+
+            <div>
+                <br />
+                <label>Amenities Included</label>
+                <div class="amenities">
+                    <ui-select multiple ng-model="mc.addressObject.amenities" theme="bootstrap" close-on-select="true">
+                        <ui-select-match placeholder="Select amenities">{{$item.amenityName}}</ui-select-match>
+                        <ui-select-choices repeat="amenity in mc.amenities">
+                            <small>{{amenity.amenityName}}</small>
+                        </ui-select-choices>
+                    </ui-select>
+                    <div role="alert" class="help-inline error">
+                        <span class="error" ng-show="mc.showAddressErrors && mc.modalForm.amenity.$error.required">Please indicate if there are any amenities included in this listing</span>
+                    </div>
+                </div>
+            </div>
+        </form>
+    </div>
+    <div class="modal-footer">
+        <button class="btn btn-primary" ng-click="mc.ok()">OK</button>
+        <button class="btn btn-warning" ng-click="mc.cancel()">Cancel</button>
+    </div>
+</script>
+
+
+@section Scripts {
+<script src="http://maps.googleapis.com/maps/api/js?key=AIzaSyD2aG8twoXw2wn0x0Xt8jB6XlgNVTOwpFA"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.4.1/js/bootstrap-datepicker.min.js"></script>
+<script src="~/Scripts/sabio.services.address.js"></script>
+<script src="~/Scripts/sabio.services.listings.js"></script>
+<script src="~/Scripts/sabio.services.files.js"></script>
+<script src="~/Scripts/sabio.services.state.js"></script>
+<script src="~/Scripts/sabio.services.amenities.js"></script>
+<script src="~/Scripts/sabio/Address/services.address.js"></script>
+<script src="~/Scripts/sabio/listings/services.listings.js"></script>
+<script src="~/Scripts/sabio/Files/Files.service.js"></script>
+<script src="~/Scripts/sabio/shared/Directives/ConvetToNumber.js"></script>
+<script src="~/Scripts/sabio/Amenities/services.amenities.js"></script>
+<script src="~/Scripts/sabio/core/services/systemEvent.service.js"></script>
+<script src="~/Scripts/sabio/Address/AddAddressModal.js"></script>
+<script src="~/Scripts/sabio/listings/ListingWizard.controllers.js"></script>
+
+}
+
+
+
+

@@ -1,0 +1,91 @@
+﻿
+@{
+    ViewBag.Title = "Display";
+    Layout = "~/Views/Shared/_LayoutAdmin.cshtml";
+}
+@Styles.Render("~/Content/faq.css")
+<div class="container">
+    
+        <h2>FAQ List</h2>
+    <br/>
+    <div class="panel-group" id="accordion">
+    </div>
+</div>
+
+@section Scripts {
+    <script src="~/Scripts/sabio.services.faq.js" type="text/javascript"></script>
+    <script type="text/javascript">
+
+        sabio.page.startUp = function () {
+
+            sabio.services.faq.getList(sabio.page.AjaxSuccess, sabio.page.AjaxError);
+
+            sabio.page.accordionContainer = $("#accordion");
+
+        };
+
+        sabio.page.AjaxSuccess = function (data) {
+            console.log(data.items);
+            $.each(data.items, sabio.page.appendFaq);
+        }
+
+        sabio.page.AjaxError = function (data) {
+            console.log("woops. Something went wrong. :(")
+        }
+
+        sabio.page.categoryName = function (data) {
+            if (data.category === 1) {
+                data.category = "Price";
+            }
+            else if (data.category === 2) {
+                data.category = "Reviews";
+            }
+            else if (data.category === 3) {
+                data.category = "User";
+            }
+            else {
+                data.category = "Location";
+            }
+        }
+
+        sabio.page.appendFaq = function (ix, faqData) {
+            sabio.page.categoryName(faqData);
+            var dateAdded = new Date(Date.parse(faqData.dateAdded));
+            var dateModified = new Date(Date.parse(faqData.dateModified));
+
+            var newFaq = $($("#faqTemplate").html());
+            newFaq.find(".faqTitle").text(faqData.question);
+            newFaq.find(".faqBody").html("Submitted by: " + "<a><i>" + faqData.userId + "</i></a>" + " on " +
+                "<span style='opacity: .5;'>" + (dateAdded.getMonth() + 1) + "/" + (dateAdded.getUTCDate()) + "/" + dateAdded.getFullYear() + "</span><br/>" +
+                "<b>Category: </b>" + faqData.category + "<br/><br/>" + faqData.answer +
+                "<br/><br/><i style='float: right;'> Modified on <span style='opacity: .5;'>" + (dateModified.getMonth() + 1) + "/" + (dateModified.getUTCDate()) + "/" + dateModified.getFullYear() + "</span></i>");
+            newFaq.find("#placeholderId").attr("id", faqData.id);
+            newFaq.find(".faqTitle").attr("href", "#" + faqData.id);
+            newFaq.find("#editLink").attr("href", "/faqs/" + faqData.id + "/edit");
+
+            sabio.page.accordionContainer.append(newFaq);
+        }
+
+    </script>
+
+    <script type="text/template" id="faqTemplate">
+        <div class="panel panel-default">
+            <div class="panel-heading">
+                <h4 class="panel-title">
+                    <a data-toggle="collapse" class="faqTitle" data-parent="#accordion" href="#collapse3">Collapsible Group 3<a id="editLink" href="#">edit</a></a>
+                </h4>
+            </div>
+            <div id="placeholderId" class="panel-collapse collapse">
+                <div class="panel-body faqBody">
+                   
+                    Lorem ipsum dolor sit amet, consectetur adipisicing elit,
+                    sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam,
+                    quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.
+
+                </div>
+            </div>
+        </div>
+    </script>
+
+}
+

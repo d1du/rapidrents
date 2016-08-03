@@ -1,0 +1,55 @@
+﻿@model Sabio.Web.Models.ViewModels.ListingDetailViewModel
+@{
+    Layout = "~/Views/Shared/_LayoutPublic.cshtml";
+}
+@Styles.Render("~/Content/faq.css")
+<head>
+    <link rel="stylesheet" type="text/css" href="~/Content/ListingDetail.css">
+</head>
+
+<div class="container body-content">
+    <div class="row">
+
+        <ng-include src="'/Scripts/sabio/listings/ListingDetailsView.html'"></ng-include>
+
+        <div id="message-box">
+            <div class="col-sm-4">
+
+                <ng-include src="'/scripts/sabio/ContactUs/ContactUsViewMini.html'"></ng-include>
+
+            </div>
+        </div>
+
+        <div class="visible-md visible-lg">
+            <h4>Other properties in this area</h4>
+            <div class="row">
+
+                <div class="col-sm-3 col-xs-6" ng-repeat="item in dashboard.nearbyAddressListings">
+                    <div class="img-thumbnail">
+                        <div ng-click="dashboard.openModal(item)">
+                            <img ng-if="item.addressListing.imgFilePaths.length == null" ng-src="http://www.fgcreia.com/Images/f86-we-buy-ugly-phoenix-houses.jpg" class="imgAutoResize itemHover" />
+                            <img ng-if="item.addressListing.imgFilePaths.length > 0" ng-src="https://sabio-training.s3-us-west-2.amazonaws.com/{{item.addressListing.imgFilePaths[0]}}" class="imgAutoResize itemHover" />
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</div>
+
+
+@section scripts{
+
+    <script src="~/Scripts/sabio.services.listings.js"></script>
+    <script src="~/Scripts/sabio.messaging.services.js"></script>
+    <script src="~/Scripts/sabio/ContactUs/ContactUsService.js"></script>
+    <script src="~/Scripts/sabio/ContactUs/ContactUsController.js"></script>
+    <script src="~/assets/admin/widgets/daterangepicker/moment.js"></script>
+    <script src="~/Scripts/sabio/listings/services.listings.js"></script>
+    <script src="~/Scripts/sabio/listings/ListingDetailsController.js"></script>
+    <script src="~/Scripts/sabio/shared/StatesProvinceCodeFilter.js"></script>
+}

@@ -1,0 +1,352 @@
+﻿@{
+    Layout = "~/Views/Shared/_LayoutAdmin.cshtml";
+}
+@Styles.Render("~/Content/faq.css")
+
+<div class="col-md-12">
+    <h2 style="margin-bottom: 10px; margin-left: 8px;">List of Amenities</h2>
+</div>
+
+<div class="col-md-12">
+    <h5 style="margin-bottom: 10px; margin-left: 8px;">Edit an amenity by clicking its card or click the button below to add a new amenity</h5>
+</div>
+
+<div ng-controller="mainController as main">
+    <div style="margin-left: 18px;"><button class="btn btn-primary" ng-click="main.openModal({})">Add Amenity</button></div>
+    <div class="panel-body" style="margin-top: 10px;">
+        <div class="col-md-5 panel" style="margin-right: 20px;" ng-repeat="item in main.listData">
+
+            <div style="cursor: pointer;" class="panel-body" ng-click="main.openModal(item)">
+                <div>
+                    <center><b>{{item.amenityName}}</b></center>
+                    <hr />
+                    <div class="repeatContent"><font face="verdana">Is measurable?:</font> {{item.typeId}}</div>
+                    <div class="repeatContent"><font face="verdana">Description:</font> <div class="wordwrap">{{item.description}}</div></div>
+                </div>
+            </div>
+
+        </div>
+
+    </div>
+</div>
+
+<script type="text/ng-template" id="modalContent">
+    <div class="modal-header">
+        <h3 class="modal-title">Amenities</h3>
+    </div>
+    <div class="modal-body">
+        <!--beginform-->
+        <form name="mc.amenityForm" ng-submit="mc.ok()" id="amenityForm" role="form" novalidate>
+            <div class="panel">
+                <div class="formHeading"><center><h4>{{mc.amenity.id? "Entry " + mc.amenity.id : "New Entry"}}</h4></center></div>
+                <div class="panel col-lg-12">
+
+                    <div class="form-group">
+                        <div class="elementPadding" style="padding-top: 10px;">
+                            <label for="amenity">Name of amenity</label>
+                            <input type="text"
+                                   name="amenityName"
+                                   id="amenity"
+                                   class="form-control"
+                                   ng-model="mc.amenity.amenityName"
+                                   ng-class="{'error': mc.showNewAmenityErrors && !mc.amenityForm.amenity.$valid}"
+                                   ng-minlength="3"
+                                   ng-maxlength="50"
+                                   required />
+                            <div role="alert" class="help-inline error">
+                                <span class="error" ng-show="mc.showNewAmenityErrors && mc.amenityForm.amenityName.$error.required">Amenity cannot be blank.</span>
+                                <span class="error" ng-show="mc.showNewAmenityErrors && mc.amenityForm.amenityName.$error.minlength">Amenity must be 3 characters or longer.</span>
+                                <span class="error" ng-show="mc.showNewAmenityErrors && mc.amenityForm.amenityName.$error.maxlength">Amenity cannot be over 50 characters.</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <div class="elementPadding">
+                            <label>Is measurable?</label>
+                            <label class="radio-inline">
+                                <input type="radio"
+                                       class="typeId"
+                                       name="typeId"
+                                       ng-model="mc.amenity.typeId"
+                                       ng-value="true"
+                                       ng-required="!mc.amenity.typeId" /> Yes
+                            </label>
+                            <label class="radio-inline">
+                                <input type="radio"
+                                       class="typeId"
+                                       name="typeId"
+                                       ng-model="mc.amenity.typeId"
+                                       ng-value="false"
+                                       ng-required="!mc.amenity.typeId" /> No
+                            </label>
+                            <div role="alert" class="help-inline error">
+                                <span class="error" ng-show="mc.showNewAmenityErrors && mc.amenityForm.typeId.$error.required">Please indicate yes/no.</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <div class="elementPadding">
+                            <label for="description">Enter description of amenity:</label>
+                            <textarea rows="4"
+                                      name="description"
+                                      id="description"
+                                      class="form-control"
+                                      ng-model="mc.amenity.description"
+                                      ng-class="{'error': mc.showNewAmenityErrors && !mc.amenityForm.description.$valid}"
+                                      ng-minlength="3"
+                                      ng-maxlength="1000"
+                                      required></textarea>
+                            <div role="alert" class="help-inline error">
+                                <span class="error" ng-show="mc.showNewAmenityErrors && mc.amenityForm.description.$error.required">Description cannot be blank.</span>
+                                <span class="error" ng-show="mc.showNewAmenityErrors && mc.amenityForm.description.$error.minlength">Description must be 3 characters or longer.</span>
+                                <span class="error" ng-show="mc.showNewAmenityErrors && mc.amenityForm.description.$error.maxlength">Description cannot be over 1000 characters.</span>
+                            </div>
+                            <div class="successMessage">{{mc.successMessage}}</div>
+                        </div>
+                    </div>
+
+                </div>
+                <center>
+                    <div class="elementPadding">
+                        <button type="submit" ng-class="mc.amenity.id? 'btn btn-info':'btn btn-primary'">{{mc.amenity.id? "Edit" : "Submit"}}</button>
+                        <div class="buttonDivider"></div>
+                        <button type="button" ng-click="mc.delete()" ng-class="mc.amenity.id? 'btn btn-warning':'hidden'">Delete</button>
+                        <div class="buttonDivider"></div>
+                        <button type="button" class="btn btn-default" ng-click="mc.cancel()">Cancel</button>
+                    </div>
+                </center>
+            </div>
+        </form>
+        <!--endform-->
+
+    </div>
+
+</script>
+
+
+
+
+
+@section Scripts {
+    <script src="~/Scripts/sabio.services.amenities.js" type="text/javascript"></script>
+    
+    <script type="text/javascript">
+        (function () {
+            "use strict";
+
+            angular.module(APPNAME)
+                .factory('$amenitiesService', AmenitiesServiceFactory);
+
+            AmenitiesServiceFactory.$inject = ['$baseService'];
+
+            function AmenitiesServiceFactory($baseService) {
+
+                var aServiceAmenitiesObject = sabio.services.amenities;
+
+                var newService = $baseService.merge(true, {}, aServiceAmenitiesObject, $baseService);
+
+                return newService;
+            }
+        })();
+
+
+        (function () {
+            "use strict";
+
+            angular.module(APPNAME)
+                .controller('mainController', MainController);
+
+            MainController.$inject = ['$scope', '$baseController', '$amenitiesService', '$uibModal'];
+
+            function MainController(
+              $scope
+              , $baseController
+              , $amenitiesService
+              , $uibModal) {
+
+                var vm = this;//this points to a new {}
+
+                vm.newAmenity = {};
+                vm.$amenitiesService = $amenitiesService;
+                vm.$uibModal = $uibModal;
+                vm.$scope = $scope;
+                
+                vm.listData = null;
+
+                vm.getAllAmenity = _getAll;
+                vm.openModal = _openModal;
+
+                vm.addSuccess = _addSuccess;
+                vm.addError = _addError;
+                vm.updateSuccess = _updateSuccess;
+                vm.updateError = _updateError;
+                vm.editError = _editError;
+                vm.getAllSuccess = _getAllSuccess;
+                vm.getAllError = _getAllError;
+
+                $baseController.merge(vm, $baseController);
+
+                vm.notify = vm.$amenitiesService.getNotifier($scope);
+                vm.feedbackMessage= _feedbackMessage;
+                render();
+
+                function _feedbackMessage (type, message, header) {
+                    vm.$alertService[type](message, header);
+                }
+
+                function render() {
+                    _getAll();
+                }
+
+                function _addSuccess(data) {
+                    //toastr
+                    render();
+                    vm.feedbackMessage('success', 'Entry successfully addded!', 'Message');
+                }
+
+                function _addError() {
+                    console.log("add failed!");
+                    vm.feedbackMessage('error', 'Entry failed to post!', 'Message');
+                }
+
+                function _updateSuccess(data) {
+                    vm.feedbackMessage('success', 'Entry successfully edited!', 'Message');
+                    console.log("update success!");
+                }
+
+                function _updateError() {
+                    vm.feedbackMessage('error', 'Entry failed to update!', 'Message');
+                    console.log("update failed!");
+                }
+
+                function _editError() {
+                    console.log("failed to retrieve post.");
+                }
+
+                function _getAllSuccess(data) {
+                    vm.notify(function () {
+                        vm.listData = data.items;
+                    });
+                }
+
+                function _getAllError() {
+                    console.log("bad bad code monkey");
+                }
+
+                function _getAll() {
+                    vm.$amenitiesService.getList(vm.getAllSuccess, vm.getAllError);
+                }
+
+                function _openModal(item) {
+                    var modalInstance = vm.$uibModal.open({
+                        animation: true,
+                        templateUrl: 'modalContent',
+                        controller: 'modalController as mc',
+                        size: 'md',
+                        resolve: {
+                            modalItem: function () {
+                                return item;
+                            }
+                        }
+                    }
+
+                    );
+
+                    modalInstance.result.then(function (selectedItem) {
+                        vm.newAmenity = selectedItem;
+                        console.log(vm.newAmenity);
+                        if (vm.newAmenity === null) {
+                            render();
+                        }
+                        else if (!vm.newAmenity.id) {
+                            vm.$amenitiesService.add(vm.newAmenity, vm.addSuccess, vm.addError);
+                        }
+                        else {
+                            vm.$amenitiesService.update(vm.newAmenity.id, vm.newAmenity, vm.updateSuccess, vm.updateError);
+                        }
+
+                    }, function () {
+                        console.log('Modal dismissed at: ' + new Date());
+                    });
+                }
+
+            }
+
+        }
+
+        )();
+
+        //second controller for opened modal
+
+        (function () {
+            "use strict";
+
+            angular.module(APPNAME)
+                .controller('modalController', ModalController);
+
+            ModalController.$inject = ['$scope', '$baseController', '$uibModalInstance', 'modalItem', '$amenitiesService']
+
+            function ModalController(
+                $scope
+                , $baseController
+                , $uibModalInstance
+                , modalItem
+                , $amenitiesService
+                ) {
+
+                var vm = this;
+
+                vm.amenityForm = null;
+                vm.showNewAmenityErrors = false;
+                vm.data = null;
+                vm.amenity = modalItem;
+
+                vm.$scope = $scope;
+                vm.$uibModalInstance = $uibModalInstance;
+                vm.$amenitiesService = $amenitiesService;
+                vm.feedbackMessage = _feedbackMessage;
+
+                $baseController.merge(vm, $baseController);
+
+                function _feedbackMessage(type, message, header) {
+                    vm.$alertService[type](message, header);
+                }
+
+                vm.deleteSuccess = function () {
+                    vm.amenity = null;
+                    vm.feedbackMessage('success', 'Entry successfully deleted!', 'Message');
+                    vm.$uibModalInstance.close(vm.amenity);
+                }
+
+                vm.deleteError = function () {
+                    console.log("X_X");
+                }
+
+                vm.delete = function () {
+                    if (confirm('Are you sure you want to delete entry ' + vm.amenity.id + '?')) {
+                        vm.$amenitiesService.delete(vm.amenity.id, vm.deleteSuccess, vm.deleteError);
+                    }
+                    else {
+                        return;
+                    }
+
+                }
+
+                vm.ok = function () {
+                    vm.showNewAmenityErrors = true;
+                    if (vm.amenityForm.$valid) {
+                        vm.$uibModalInstance.close(vm.amenity);
+                    }
+                };
+
+                vm.cancel = function () {
+                    vm.$uibModalInstance.dismiss('Cancel');
+                };
+            }
+
+        })();
+
+    </script>
+}
