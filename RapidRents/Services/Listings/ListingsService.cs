@@ -1,14 +1,14 @@
-﻿using Sabio.Data;
-using Sabio.Web.Domain.Listings;
-using Sabio.Web.Models.Requests.Listings;
-using Sabio.Web.Services.Addresses;
+﻿using RapidRents.Data;
+using RapidRents.Web.Domain.Listings;
+using RapidRents.Web.Models.Requests.Listings;
+using RapidRents.Web.Services.Addresses;
 using System;
 using System.Collections.Generic;
 using System.Data;
 using System.Data.SqlClient;
 using System.Linq;
 
-namespace Sabio.Web.Services.Listings
+namespace RapidRents.Web.Services.Listings
 {
     public class ListingsService : BaseService, IListingsService
     {
