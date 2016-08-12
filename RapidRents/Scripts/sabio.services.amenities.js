@@ -1,6 +1,6 @@
-﻿sabio.services.amenities = sabio.services.amenities || {};
+﻿rapidrents.services.amenities = rapidrents.services.amenities || {};
 
-sabio.services.amenities.add = function (amenityData, onSuccess, onError) {
+rapidrents.services.amenities.add = function (amenityData, onSuccess, onError) {
     var url = "/api/amenities/";
     var settings = {
         cache: false
@@ -14,7 +14,7 @@ sabio.services.amenities.add = function (amenityData, onSuccess, onError) {
     $.ajax(url, settings);
 }
 
-sabio.services.amenities.update = function (amenityId, amenityData, onSuccess, onError) {
+rapidrents.services.amenities.update = function (amenityId, amenityData, onSuccess, onError) {
     var url = "/api/amenities/" + amenityId;
     var settings = {
         cache: false
@@ -28,7 +28,7 @@ sabio.services.amenities.update = function (amenityId, amenityData, onSuccess, o
     $.ajax(url, settings);
 }
 
-sabio.services.amenities.getEdit = function (amenityId, onSuccess, onError) {
+rapidrents.services.amenities.getEdit = function (amenityId, onSuccess, onError) {
     $.ajax({
         url: "/api/amenities/" + amenityId,
         contentType: "application/x-www-form-urlencoded; charset=UTF-8",
@@ -40,7 +40,7 @@ sabio.services.amenities.getEdit = function (amenityId, onSuccess, onError) {
 
 }
 
-sabio.services.amenities.getList = function (onSuccess, onError) {
+rapidrents.services.amenities.getList = function (onSuccess, onError) {
     $.ajax({
         url: "/api/amenities",
         contentType: "application/x-www-form-urlencoded; charset=UTF-8",
@@ -51,7 +51,7 @@ sabio.services.amenities.getList = function (onSuccess, onError) {
     })
 }
 
-sabio.services.amenities.delete = function (amenityId, onSuccess, onError) {
+rapidrents.services.amenities.delete = function (amenityId, onSuccess, onError) {
     $.ajax({
         url: "/api/amenities/" + amenityId,
         contentType: "application/x-www-form-urlencoded; charset=UTF-8",
