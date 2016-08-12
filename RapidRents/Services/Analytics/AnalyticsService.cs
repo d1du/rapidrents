@@ -1,14 +1,14 @@
-﻿using Sabio.Data;
+﻿using RapidRents.Data;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using System.Data;
 using System.Data.SqlClient;
-using Sabio.Web.Models.Requests.Analytics;
-using Sabio.Web.Domain;
+using RapidRents.Web.Models.Requests.Analytics;
+using RapidRents.Web.Domain;
 
-namespace Sabio.Web.Services.Analytics
+namespace RapidRents.Web.Services.Analytics
 {
     public class AnalyticsService : BaseService, IAnalyticsService
     {
@@ -35,7 +35,7 @@ namespace Sabio.Web.Services.Analytics
 
                     if (model.DataArr != null && model.DataArr.Any())
                     {
-                        ids.Value = new Sabio.Data.NVarcharTable(model.DataArr);
+                        ids.Value = new RapidRents.Data.NVarcharTable(model.DataArr);
                     }
 
                     paramCollection.Add(ids);
