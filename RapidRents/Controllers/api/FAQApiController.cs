@@ -1,16 +1,16 @@
-﻿using Sabio.Web.Models.Requests.FAQ;
-using Sabio.Web.Models.Responses;
+﻿using RapidRents.Web.Models.Requests.FAQ;
+using RapidRents.Web.Models.Responses;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Net;
 using System.Net.Http;
 using System.Web.Http;
-using Sabio.Web.Services.FAQ;
-using Sabio.Web.Services;
-using Sabio.Web.Domain;
+using RapidRents.Web.Services.FAQ;
+using RapidRents.Web.Services;
+using RapidRents.Web.Domain;
 
-namespace Sabio.Web.Controllers.Api
+namespace RapidRents.Web.Controllers.Api
 {
     [RoutePrefix("api/faq")] 
     public class FAQApiController : ApiController
