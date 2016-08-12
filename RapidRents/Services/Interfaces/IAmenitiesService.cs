@@ -1,8 +1,8 @@
 ﻿using System.Collections.Generic;
-using Sabio.Web.Domain;
-using Sabio.Web.Models.Requests.Amenities;
+using RapidRents.Web.Domain;
+using RapidRents.Web.Models.Requests.Amenities;
 
-namespace Sabio.Web.Services.AmenitiesServices
+namespace RapidRents.Web.Services.AmenitiesServices
 {
     public interface IAmenitiesService
     {
