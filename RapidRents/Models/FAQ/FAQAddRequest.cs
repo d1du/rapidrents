@@ -4,7 +4,7 @@ using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Web;
 
-namespace Sabio.Web.Models.Requests.FAQ
+namespace RapidRents.Web.Models.Requests.FAQ
 {
     public class FAQAddRequest
     {
