@@ -1,7 +1,7 @@
 ﻿using System.Collections.Generic;
-using Sabio.Web.Models.Requests.Analytics;
+using RapidRents.Web.Models.Requests.Analytics;
 
-namespace Sabio.Web.Services.Analytics
+namespace RapidRents.Web.Services.Analytics
 {
     public interface IAnalyticsService
     {
