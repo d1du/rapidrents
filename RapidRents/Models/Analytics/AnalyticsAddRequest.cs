@@ -4,7 +4,7 @@ using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Web;
 
-namespace Sabio.Web.Models.Requests.Analytics
+namespace RapidRents.Web.Models.Requests.Analytics
 {
     public class AnalyticsAddRequest
     {
