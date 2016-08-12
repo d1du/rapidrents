@@ -4,13 +4,13 @@ using System.Linq;
 using System.Web;
 using System.Data;
 using System.Data.SqlClient;
-using Sabio.Data;
-using Sabio.Web.Models.Requests.Amenities;
-using Sabio.Web.Domain;
-using Sabio.Web.Core;
-using Sabio.Web.Cache;
+using RapidRents.Data;
+using RapidRents.Web.Models.Requests.Amenities;
+using RapidRents.Web.Domain;
+using RapidRents.Web.Core;
+using RapidRents.Web.Cache;
 
-namespace Sabio.Web.Services.AmenitiesServices
+namespace RapidRents.Web.Services.AmenitiesServices
 {
     public class AmenitiesService : BaseService, IAmenitiesService
     {
