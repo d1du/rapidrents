@@ -1,7 +1,7 @@
-﻿using Sabio.Web.Models.ViewModels;
+﻿using RapidRents.Web.Models.ViewModels;
 using System.Web.Mvc;
 
-namespace Sabio.Web.Controllers
+namespace RapidRents.Web.Controllers
 {
     [Authorize]
     [RoutePrefix("addresses")]
