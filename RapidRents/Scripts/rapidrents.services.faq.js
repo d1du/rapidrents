@@ -1,6 +1,6 @@
-﻿sabio.services.faq = sabio.services.faq || {};
+﻿rapidrents.services.faq = rapidrents.services.faq || {};
 
-sabio.services.faq.add = function (faqData, onSuccess, onError) {
+rapidrents.services.faq.add = function (faqData, onSuccess, onError) {
     var url = "/api/faq/";
     var settings = {
         cache: false
@@ -14,7 +14,7 @@ sabio.services.faq.add = function (faqData, onSuccess, onError) {
     $.ajax(url, settings);
 }
 
-sabio.services.faq.update = function (faqId, faqData, onSuccess, onError) {
+rapidrents.services.faq.update = function (faqId, faqData, onSuccess, onError) {
     var url = "/api/faq/" + faqId;
     var settings = {
         cache: false
@@ -28,7 +28,7 @@ sabio.services.faq.update = function (faqId, faqData, onSuccess, onError) {
     $.ajax(url, settings);
 }
 
-sabio.services.faq.getEdit = function (faqId, onSuccess, onError) {
+rapidrents.services.faq.getEdit = function (faqId, onSuccess, onError) {
     $.ajax({
         url: "/api/faq/" + faqId,
         contentType: "application/x-www-form-urlencoded; charset=UTF-8",
@@ -40,7 +40,7 @@ sabio.services.faq.getEdit = function (faqId, onSuccess, onError) {
 
 }
 
-sabio.services.faq.getList = function (onSuccess, onError) {
+rapidrents.services.faq.getList = function (onSuccess, onError) {
     $.ajax({
         url: "/api/faq",
         contentType: "application/x-www-form-urlencoded; charset=UTF-8",
@@ -51,7 +51,7 @@ sabio.services.faq.getList = function (onSuccess, onError) {
     })
 }
 
-sabio.services.faq.delete = function (faqId, onSuccess, onError) {
+rapidrents.services.faq.delete = function (faqId, onSuccess, onError) {
     $.ajax({
         url: "/api/faq/" + faqId,
         contentType: "application/x-www-form-urlencoded; charset=UTF-8",
