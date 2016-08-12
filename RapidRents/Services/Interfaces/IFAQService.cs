@@ -1,8 +1,8 @@
 ﻿using System.Collections.Generic;
-using Sabio.Web.Domain;
-using Sabio.Web.Models.Requests.FAQ;
+using RapidRents.Web.Domain;
+using RapidRents.Web.Models.Requests.FAQ;
 
-namespace Sabio.Web.Services.FAQ
+namespace RapidRents.Web.Services.FAQ
 {
     public interface IFAQService
     {
