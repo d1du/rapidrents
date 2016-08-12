@@ -1,4 +1,4 @@
-﻿@model Sabio.Web.Models.ViewModels.ItemViewModel<int?>
+﻿@model rapidrents.Web.Models.ViewModels.ItemViewModel<int?>
 @{
     Layout = "~/Views/Shared/_LayoutAdmin.cshtml";
 }
@@ -54,19 +54,19 @@
 
 @section Scripts {
     <script src="~/Scripts/jquery.validate.min.js"></script>
-    <script src="~/Scripts/sabio.services.faq.js" type="text/javascript"></script>
-    <script src="~/Scripts/sabio.services.analytics.js" type="text/javascript"></script>
+    <script src="~/Scripts/rapidrents.services.faq.js" type="text/javascript"></script>
+    <script src="~/Scripts/rapidrents.services.analytics.js" type="text/javascript"></script>
 
     <script type="text/javascript">
-        sabio.page.startUp = function () {
-            sabio.page.initializeValidation();
-            sabio.page.editEntry(@Model.Item);
-            $("#submitFAQ").on("click", sabio.page.handlers.onSampleFormSubmit);
-            $("#deleteFAQ").on("click", sabio.page.handlers.onDelete);
+        rapidrents.page.startUp = function () {
+            rapidrents.page.initializeValidation();
+            rapidrents.page.editEntry(@Model.Item);
+            $("#submitFAQ").on("click", rapidrents.page.handlers.onSampleFormSubmit);
+            $("#deleteFAQ").on("click", rapidrents.page.handlers.onDelete);
 
         };
 
-        sabio.page.initializeValidation = function () {
+        rapidrents.page.initializeValidation = function () {
 
             jQuery.validator.setDefaults({
                 debug: true
@@ -103,25 +103,25 @@
             });
         };
 
-        sabio.page.handlers.onSampleFormSubmit = function () {
+        rapidrents.page.handlers.onSampleFormSubmit = function () {
             if ($('#sample-form').valid()) {
                 var myData = $("#sample-form").serialize();
-                if (!sabio.page.currentId) {
-                    sabio.services.faq.add(myData, sabio.page.insertAjaxSuccess, sabio.page.insertAjaxError);
+                if (!rapidrents.page.currentId) {
+                    rapidrents.services.faq.add(myData, rapidrents.page.insertAjaxSuccess, rapidrents.page.insertAjaxError);
                     $(".successMessage").html("Entry successfully submitted!");
                     $("#deleteFAQ").attr("class", "btn btn-default");
                 }
                 else {
-                    var editData = myData + "&id=" + sabio.page.currentId;
-                    sabio.services.faq.update(sabio.page.currentId, editData, sabio.page.updateAjaxSuccess, sabio.page.updateAjaxError);
+                    var editData = myData + "&id=" + rapidrents.page.currentId;
+                    rapidrents.services.faq.update(rapidrents.page.currentId, editData, rapidrents.page.updateAjaxSuccess, rapidrents.page.updateAjaxError);
                     $(".successMessage").html("Entry successfully edited!")
                 }
             }
         };
 
-        sabio.page.handlers.onDelete = function () {
-            if (confirm('Are you sure you want to delete entry ' + sabio.page.currentId + '?')) {
-                sabio.services.faq.delete(sabio.page.currentId, sabio.page.deleteAjaxSuccess, sabio.page.deleteAjaxError);
+        rapidrents.page.handlers.onDelete = function () {
+            if (confirm('Are you sure you want to delete entry ' + rapidrents.page.currentId + '?')) {
+                rapidrents.services.faq.delete(rapidrents.page.currentId, rapidrents.page.deleteAjaxSuccess, rapidrents.page.deleteAjaxError);
                 setTimeout(function () {
                     window.location = "/faqs/add";
                 }, 1000);
@@ -131,55 +131,55 @@
             }
         }
 
-        sabio.page.insertAjaxSuccess = function (data) {
-            sabio.page.currentId = data.item;
-            sabio.page.editChange(sabio.page.currentId);
+        rapidrents.page.insertAjaxSuccess = function (data) {
+            rapidrents.page.currentId = data.item;
+            rapidrents.page.editChange(rapidrents.page.currentId);
             console.log("Insert was successful!");
         }
 
-        sabio.page.updateAjaxSuccess = function () {
+        rapidrents.page.updateAjaxSuccess = function () {
             console.log("UPDATE ENTRY was successful!");
         }
 
-        sabio.page.editAjaxSuccess = function (data) {
+        rapidrents.page.editAjaxSuccess = function (data) {
             if (data.item === null) {
                 window.location = "/faqs/errorpage";
             }
             $("#question").val(data.item.question);
             $("#category").val(data.item.category);
             $("#answer").val(data.item.answer);
-            sabio.page.currentId = data.item.id;
-            sabio.page.editChange(sabio.page.currentId);
+            rapidrents.page.currentId = data.item.id;
+            rapidrents.page.editChange(rapidrents.page.currentId);
         }
 
-        sabio.page.deleteAjaxSuccess = function () {
+        rapidrents.page.deleteAjaxSuccess = function () {
             $("#sample-form").trigger("reset");
             $(".successMessage").html("Entry successfully deleted!");
         }
 
-        sabio.page.insertAjaxError = function () {
+        rapidrents.page.insertAjaxError = function () {
             console.log(":(");
         }
 
-        sabio.page.updateAjaxError = function () {
+        rapidrents.page.updateAjaxError = function () {
             console.log("=(");
         }
 
-        sabio.page.editAjaxError = function () {
+        rapidrents.page.editAjaxError = function () {
             console.log("x(");
         }
 
-        sabio.page.deleteAjaxError = function () {
+        rapidrents.page.deleteAjaxError = function () {
             console.log("X_X");
         }
 
-        sabio.page.editEntry = function (id) {
+        rapidrents.page.editEntry = function (id) {
             if (id) {
-                sabio.services.faq.getEdit(id, sabio.page.editAjaxSuccess, sabio.page.editAjaxError);
+                rapidrents.services.faq.getEdit(id, rapidrents.page.editAjaxSuccess, rapidrents.page.editAjaxError);
             }
         }
 
-        sabio.page.editChange = function (id) {
+        rapidrents.page.editChange = function (id) {
             $("#submitFAQ").html("Edit").attr("class", "btn btn-info");
             $("h4").html("Entry " + id);
             $("#deleteFAQ").attr("class", "btn btn-default");
