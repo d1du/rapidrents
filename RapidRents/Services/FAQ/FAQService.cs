@@ -4,13 +4,13 @@ using System.Linq;
 using System.Web;
 using System.Data;
 using System.Data.SqlClient;
-using Sabio.Data;
-using Sabio.Web.Models.Requests.FAQ;
-using Sabio.Web.Domain;
-using Sabio.Web.Cache;
-using Sabio.Web.Core;
+using RapidRents.Data;
+using RapidRents.Web.Models.Requests.FAQ;
+using RapidRents.Web.Domain;
+using RapidRents.Web.Cache;
+using RapidRents.Web.Core;
 
-namespace Sabio.Web.Services.FAQ
+namespace RapidRents.Web.Services.FAQ
 {
     public class FAQService : BaseService, IFAQService
 
