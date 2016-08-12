@@ -1,4 +1,4 @@
-﻿@model Sabio.Web.Models.ViewModels.ListingDetailViewModel
+﻿@model rapidrents.Web.Models.ViewModels.ListingDetailViewModel
 @{
     Layout = "~/Views/Shared/_LayoutPublic.cshtml";
 }
@@ -10,12 +10,12 @@
 <div class="container body-content">
     <div class="row">
 
-        <ng-include src="'/Scripts/sabio/listings/ListingDetailsView.html'"></ng-include>
+        <ng-include src="'/Scripts/rapidrents/listings/ListingDetailsView.html'"></ng-include>
 
         <div id="message-box">
             <div class="col-sm-4">
 
-                <ng-include src="'/scripts/sabio/ContactUs/ContactUsViewMini.html'"></ng-include>
+                <ng-include src="'/scripts/rapidrents/ContactUs/ContactUsViewMini.html'"></ng-include>
 
             </div>
         </div>
@@ -28,7 +28,7 @@
                     <div class="img-thumbnail">
                         <div ng-click="dashboard.openModal(item)">
                             <img ng-if="item.addressListing.imgFilePaths.length == null" ng-src="http://www.fgcreia.com/Images/f86-we-buy-ugly-phoenix-houses.jpg" class="imgAutoResize itemHover" />
-                            <img ng-if="item.addressListing.imgFilePaths.length > 0" ng-src="https://sabio-training.s3-us-west-2.amazonaws.com/{{item.addressListing.imgFilePaths[0]}}" class="imgAutoResize itemHover" />
+                            <img ng-if="item.addressListing.imgFilePaths.length > 0" ng-src="https://rapidrents-training.s3-us-west-2.amazonaws.com/{{item.addressListing.imgFilePaths[0]}}" class="imgAutoResize itemHover" />
                         </div>
                     </div>
                 </div>
@@ -44,12 +44,12 @@
 
 @section scripts{
 
-    <script src="~/Scripts/sabio.services.listings.js"></script>
-    <script src="~/Scripts/sabio.messaging.services.js"></script>
-    <script src="~/Scripts/sabio/ContactUs/ContactUsService.js"></script>
-    <script src="~/Scripts/sabio/ContactUs/ContactUsController.js"></script>
+    <script src="~/Scripts/rapidrents.services.listings.js"></script>
+    <script src="~/Scripts/rapidrents.messaging.services.js"></script>
+    <script src="~/Scripts/rapidrents/ContactUs/ContactUsService.js"></script>
+    <script src="~/Scripts/rapidrents/ContactUs/ContactUsController.js"></script>
     <script src="~/assets/admin/widgets/daterangepicker/moment.js"></script>
-    <script src="~/Scripts/sabio/listings/services.listings.js"></script>
-    <script src="~/Scripts/sabio/listings/ListingDetailsController.js"></script>
-    <script src="~/Scripts/sabio/shared/StatesProvinceCodeFilter.js"></script>
+    <script src="~/Scripts/rapidrents/listings/services.listings.js"></script>
+    <script src="~/Scripts/rapidrents/listings/ListingDetailsController.js"></script>
+    <script src="~/Scripts/rapidrents/shared/StatesProvinceCodeFilter.js"></script>
 }
