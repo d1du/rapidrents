@@ -1,16 +1,16 @@
-﻿using Sabio.Web.Models.Requests.Amenities;
-using Sabio.Web.Models.Responses;
+﻿using RapidRents.Web.Models.Requests.Amenities;
+using RapidRents.Web.Models.Responses;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Net;
 using System.Net.Http;
 using System.Web.Http;
-using Sabio.Web.Services.AmenitiesServices;
-using Sabio.Web.Services;
-using Sabio.Web.Domain;
+using RapidRents.Web.Services.AmenitiesServices;
+using RapidRents.Web.Services;
+using RapidRents.Web.Domain;
 
-namespace Sabio.Web.Controllers.Api
+namespace RapidRents.Web.Controllers.Api
 {
     [RoutePrefix("api/amenities")]
     public class AmenitiesApiController : ApiController
