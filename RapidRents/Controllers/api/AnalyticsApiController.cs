@@ -1,7 +1,7 @@
-﻿using Sabio.Web.Models.Requests.Analytics;
-using Sabio.Web.Models.Responses;
-using Sabio.Web.Services;
-using Sabio.Web.Services.Analytics;
+﻿using RapidRents.Web.Models.Requests.Analytics;
+using RapidRents.Web.Models.Responses;
+using RapidRents.Web.Services;
+using RapidRents.Web.Services.Analytics;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -10,7 +10,7 @@ using System.Net.Http;
 using System.Web;
 using System.Web.Http;
 
-namespace Sabio.Web.Controllers.Api
+namespace RapidRents.Web.Controllers.Api
 {
     [RoutePrefix("api/analytics")]
     public class AnalyticsApiController : ApiController
