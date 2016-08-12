@@ -1,11 +1,11 @@
 ﻿using Newtonsoft.Json;
-using Sabio.Web.Domain.Address;
-using Sabio.Web.Domain.Listings;
-using Sabio.Web.Models.Requests.CompareListings;
-using Sabio.Web.Models.Requests.Listings;
-using Sabio.Web.Models.Responses;
-using Sabio.Web.Services;
-using Sabio.Web.Services.Listings;
+using RapidRents.Web.Domain.Address;
+using RapidRents.Web.Domain.Listings;
+using RapidRents.Web.Models.Requests.CompareListings;
+using RapidRents.Web.Models.Requests.Listings;
+using RapidRents.Web.Models.Responses;
+using RapidRents.Web.Services;
+using RapidRents.Web.Services.Listings;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -15,7 +15,7 @@ using System.Net.Http.Headers;
 using System.Web;
 using System.Web.Http;
 
-namespace Sabio.Web.Controllers.Api
+namespace RapidRents.Web.Controllers.Api
 {
     [RoutePrefix("api/listings")]
     public class ListingsApiController : ApiController
