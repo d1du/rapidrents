@@ -318,7 +318,7 @@
     <script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/angular-ui-bootstrap/0.13.4/ui-bootstrap-tpls.min.js"></script>
 
-    <script src="~/Scripts/sabio.services.propertylisting.js" type="text/javascript"></script>
+    <script src="~/Scripts/rapidrents.services.propertylisting.js" type="text/javascript"></script>
 
     <script type="text/javascript">
 
@@ -330,7 +330,7 @@
 
             function PropertyListingServiceFactory($baseService) {
 
-                var propertyListingServiceObject = sabio.services.propertylisting;
+                var propertyListingServiceObject = rapidrents.services.propertylisting;
 
                 var newPropertyListingService = $baseService.merge(true, {}, propertyListingServiceObject, $baseService);
 
