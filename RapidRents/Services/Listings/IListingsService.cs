@@ -1,9 +1,9 @@
-﻿using Sabio.Web.Domain.Listings;
-using Sabio.Web.Models.Requests.Listings;
+﻿using RapidRents.Web.Domain.Listings;
+using RapidRents.Web.Models.Requests.Listings;
 using System.Collections.Generic;
 using System.Data;
 
-namespace Sabio.Web.Services.Listings
+namespace RapidRents.Web.Services.Listings
 {
     public interface IListingsService
     {
