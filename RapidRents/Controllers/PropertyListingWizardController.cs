@@ -1,6 +1,6 @@
 ﻿using System.Web.Mvc;
 
-namespace Sabio.Web.Controllers
+namespace RapidRents.Web.Controllers
 {
     [Authorize]
     [RoutePrefix("listings/wizard")]
